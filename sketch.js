@@ -101,7 +101,7 @@ function drawInterface() {
 
   // Interfaz ajustada a la ventana
 
-   textFont = loadFont("Recursos/JaroRegular.ttf")
+  textFont('jaro');
   noStroke(); fill(43, 105, 176); rect(13 * scale, 127 * scale, 385 * scale, 707  * scale, 29 * scale, 29 * scale, 29 * scale, 29 * scale); // marco azul
   noStroke(); fill(84, 182, 87); rect(25 * scale, 240 * scale, 358 * scale, 563 * scale, 29 * scale, 29 * scale, 29 * scale, 29 * scale); // marco verde
   
