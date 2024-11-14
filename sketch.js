@@ -3,7 +3,6 @@
 
 
 
-let JaroFont;
 let balls = [];
 let selectedBall = null;
 let gravity = 0.2; // Fuerza de gravedad
@@ -21,9 +20,6 @@ const baseHeight = 917;
 
 
 
-function preload() {
-  JaroFont = loadFont("Files/JaroRegular.ttf");
-}
 
 function adjustCanvasSize() {
   let windowAspect = windowWidth / windowHeight;
@@ -41,7 +37,7 @@ function adjustCanvasSize() {
   
   adjustCanvasSize();
   createCanvas(canvasWidth, canvasHeight);
-  textFont(JaroFont);
+  textFont('jaro');
   initializeBalls();
 
   }
