@@ -1,3 +1,4 @@
+let scale;
 let balls = [];
 let selectedBall = null;
 let gravity = 0.2; // Fuerza de gravedad
@@ -470,8 +471,13 @@ function updateBalls() {
 }
 
 function checkCollisionWithHoles(ball, ballIndex) {
+  let scaleX = windowWidth / baseWidth;
+  let scaleY = windowHeight / baseHeight;
+  let scale = min(scaleX, scaleY); // Usar el menor factor de escala para uniformidad
+
   for (let hole of holes) {
-    let d = dist(ball.x, ball.y, hole.x, hole.y);
+    const d = dist(ball.x, ball.y, hole.x * scale, hole.y * scale);
+
     if (d < ball.radius + hole.radius) {
       playerScores[currentPlayer] += hole.points;
       return true;
@@ -499,28 +505,35 @@ function displayWinner() {
   textSize(36 * scale);
   textAlign(CENTER, CENTER);
   let winnerText = `¡Jugador ${currentPlayer + 1} ha ganado!`;
-  text(winnerText, width / 2, (height / 2) * scale);
+  text(winnerText, width / 2, height / 2);
   drawResetButton();
+  console.log((width / 9) * scale, (height / 2) * scale);
 } //muestra pantalla de ganador
 
 function drawResetButton() {
+  // Calcular el factor de escala
   let scaleX = windowWidth / baseWidth;
   let scaleY = windowHeight / baseHeight;
   let scale = min(scaleX, scaleY); // Usar el menor factor de escala para uniformidad
 
-  fill(43, 105, 176);
-  rectMode(CENTER);
+  // Establecer el centro del botón en el centro del lienzo
   let buttonX = width / 2;
-  let buttonY = 600 * scale;
+  let buttonY = height / 2 + 150 * scale; // Ajustar la posición verticalmente
   let buttonWidth = 120 * scale;
   let buttonHeight = 60 * scale;
+
+  // Dibujar el rectángulo del botón
+  fill(43, 105, 176);
+  rectMode(CENTER);
   rect(buttonX, buttonY, buttonWidth, buttonHeight, 30 * scale);
 
+  // Dibujar el texto del botón
   fill(255);
   textSize(20 * scale);
   textAlign(CENTER, CENTER);
   text("Reiniciar", buttonX, buttonY);
 
+  // Definir los límites del botón para la detección de clics
   resetButton = { x: buttonX, y: buttonY, w: buttonWidth, h: buttonHeight };
 }
 
